@@ -1,0 +1,76 @@
+definitions:
+  model.MetadataResponse:
+    properties:
+      message:
+        type: string
+      status:
+        type: boolean
+      timeExecution:
+        type: string
+    type: object
+  model.UserModel:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      region:
+        type: string
+      status:
+        type: boolean
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/dev/user/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.UserModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      tags:
+      - user
+  /v1/dev/user/get-one:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+swagger: "2.0"
